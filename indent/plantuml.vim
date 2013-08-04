@@ -1,4 +1,5 @@
 "  vim: set sw=3 sts=3:
+set sw=2 expandtab
 
 " PlantUML Sequence indent script
 
