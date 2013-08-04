@@ -9,5 +9,12 @@ if did_filetype()	" filetype already set..
 	  finish		" ..don't do these checks
 endif
 
-autocmd BufRead,BufNewFile * :if getline(1) =~ '^.*startuml.*$' | setlocal filetype=plantuml | endif
-autocmd BufRead,BufNewFile *.uml,*.plantuml set filetype=plantuml
+
+fun! s:DetectPlantUML()
+    if getline(1) =~ '^.*startuml.*$' 
+        set filetype=plantuml
+    endif
+endfun
+
+autocmd BufNewFile,BufRead * call s:DetectPlantUML()
+autocmd BufNewFile,BufRead *.uml,*.plantuml set filetype=plantuml
