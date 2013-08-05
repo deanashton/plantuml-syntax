@@ -51,6 +51,14 @@ function! GetPlantUMLIndent()
       return ind - &sw
    endif
 
+   if s:Ends_with_openbrace( prev_data )
+      return ind + &sw
+   endif
+
+   if s:Ends_with_closebrace( getline(v:lnum) )
+      return ind - &sw
+   endif
+
    return ind
 
 "   " Increase indent if the previous line contains an opening brace. Search
@@ -161,6 +169,20 @@ endfunction
 
 function! s:Starts_with_endword( line )
    if a:line =~ '^\s*end\>'
+     return 1
+  endif
+  return 0
+endfunction
+
+function! s:Ends_with_openbrace( line )
+   if a:line =~ '{\s*$'
+     return 1
+  endif
+  return 0
+endfunction
+
+function! s:Ends_with_closebrace( line )
+   if a:line =~ '}\s*$'
      return 1
   endif
   return 0
